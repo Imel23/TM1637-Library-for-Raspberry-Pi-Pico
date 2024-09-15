@@ -2,6 +2,8 @@
 
 This repository contains a C library for interfacing with the TM1637 4-digit 7-segment display using the Raspberry Pi Pico. The library provides functions to initialize the display, set brightness, display digits or numbers, and clear the display.
 
+![TM1637 with Raspberry Pi Pico example](img/image.jpeg)
+
 ## Table of Contents
 
 - [Features](#features)
@@ -58,7 +60,7 @@ Replace `yourusername` with your GitHub username or the appropriate URL.
 Connect the TM1637 module to the Raspberry Pi Pico as follows:
 
 | TM1637 Pin | Raspberry Pi Pico Pin |
-|------------|-----------------------|
+| ---------- | --------------------- |
 | VCC        | 3.3V (Pin 36)         |
 | GND        | GND (Pin 38)          |
 | DIO        | GPIO 3 (Pin 5)        |
