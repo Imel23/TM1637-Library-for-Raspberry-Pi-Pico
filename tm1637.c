@@ -90,7 +90,44 @@ void tm1637_display_number(int number)
     }
 }
 
-void tm1637_display_clock(int time) //Displays a 4 digit number with the colon enabled to function as a clock
+void tm1637_display_number_without_leading_zero(int number) // Displays a number without leading zeros, i.e. 12 instead of 0012
+{
+    if (number < 0 || number > 9999)
+        return;
+
+    uint8_t digits[4] = {0};
+
+    for (int i = 0; i < 4; i++)
+    {   
+        digits[3 - i] = number % 10;
+        number /= 10;
+    }
+
+    tm1637_start();
+    tm1637_write_byte(TM1637_CMD_DATA_FIXED);
+    tm1637_stop();
+
+
+    bool sig_fig_found = false;
+    for (int i = 0; i < 4; i++)
+    {
+        if (digits[i] != 0 || sig_fig_found || i == 3)
+        {
+            sig_fig_found = true;
+            tm1637_start();
+            tm1637_write_byte(TM1637_CMD_ADDR_START + i);
+            tm1637_write_byte(segment_patterns[digits[i]]);
+            tm1637_stop();
+        } else {
+            tm1637_start();
+            tm1637_write_byte(TM1637_CMD_ADDR_START + i);
+            tm1637_write_byte(0x00);
+            tm1637_stop();
+        }
+    }
+}
+
+void tm1637_display_clock(int time) // Displays a 4 digit number with the colon enabled to function as a clock
 {
     if (time < 0 || time > 2400)
           return;

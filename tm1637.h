@@ -25,6 +25,7 @@ void tm1637_init(uint gpio_clk, uint gpio_dio);
 void tm1637_set_brightness(tm1637_brightness_t brightness);
 void tm1637_display_digit(uint8_t position, uint8_t digit);
 void tm1637_display_number(int number);
+void tm1637_display_number_without_leading_zero(int number);
 void tm1637_display_clock(int time);
 void tm1637_clear_display(void);
 
